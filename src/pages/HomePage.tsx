@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 export default function HomePage() {
   return (
@@ -264,6 +264,7 @@ function Partners() {
   );
 }
 
+
 function Hero() {
   return (
     <section
@@ -315,24 +316,110 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 py-10">
-      <h2 className="text-2xl font-semibold">About Us</h2>
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-          <h3 className="text-sm font-semibold">Our Mission</h3>
-          <p className="mt-2 text-slate-600">
-            To cultivate empathetic & passionate learners of technology while
-            equipping them with relevant skills and industry insights.
-          </p>
+    <section id="about" className="mx-auto max-w-6xl px-4 py-16">
+      <h2 className="text-center text-3xl font-bold text-slate-900 mb-12">
+        About Us
+      </h2>
+
+      <div className="grid gap-6 md:grid-cols-2 mb-16">
+        {/* Our Mission */}
+        <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-blue-500 flex items-center justify-center">
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
+                Our Mission
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                To cultivate empathetic & passionate learners of technology
+                while equipping them with relevant skills and industry insights.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-slate-900 p-5">
-          <h3 className="text-sm font-semibold">Our Vision</h3>
-          <p className="mt-2 text-slate-300">
-            We strive for the betterment of society through technology.
-          </p>
+
+        {/* Our Vision */}
+        <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-purple-500 flex items-center justify-center">
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
+                Our Vision
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                We strive for the betterment of society through technology.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <FAQ />
+
+      {/* Left side text + Right side FAQ */}
+      <div className="grid gap-8 md:grid-cols-[1fr_1.8fr] items-start">
+        {/* Left side */}
+        <div>
+          <h3
+            className="text-4xl text-slate-900 mb-3 tracking-tight"
+            style={{
+              fontFamily:
+                '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif',
+            }}
+          >
+            Developer Student Club
+          </h3>
+          <div className="w-96 h-1.5 bg-slate-900 mb-6"></div>
+          <p
+            className="text-2xl text-slate-900 tracking-[0.15em]"
+            style={{
+              fontFamily:
+                '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif',
+            }}
+          >
+            #TECHFORGOOD
+          </p>
+        </div>
+
+        {/* Right side - FAQ */}
+        <FAQ />
+      </div>
     </section>
   );
 }
@@ -342,21 +429,25 @@ function FAQ() {
     {
       q: "What is DSC?",
       a: "A student community supported by Google Developers to grow peer-to-peer learning and build real projects.",
+      color: "bg-amber-400 hover:bg-amber-500",
     },
     {
       q: "How is DSC different?",
       a: "We emphasise hands-on learning through workshops, hacknights and open-source projects with impact.",
+      color: "bg-green-500 hover:bg-green-600",
     },
     {
       q: "How did we start?",
       a: "We began as a small group of builders that wanted a welcoming space to learn modern dev tools together.",
+      color: "bg-blue-500 hover:bg-blue-600",
     },
   ];
+
   return (
-    <div className="mt-4 space-y-3">
+    <div className="space-y-4">
       {items.map((it, i) => (
-        <Accordion key={i} title={it.q}>
-          <p className="text-slate-300">{it.a}</p>
+        <Accordion key={i} title={it.q} color={it.color}>
+          <p className="text-slate-700 text-sm leading-relaxed">{it.a}</p>
         </Accordion>
       ))}
     </div>
@@ -366,30 +457,36 @@ function FAQ() {
 function Accordion({
   title,
   children,
+  color,
 }: {
   title: string;
   children: React.ReactNode;
+  color: string;
 }) {
   const [open, setOpen] = useState(false);
+
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200">
+    <div className="overflow-hidden rounded-xl shadow-sm">
       <button
-        onClick={() => setOpen((s) => !s)}
-        className="flex w-full items-center justify-between bg-slate-900 px-5 py-4 text-left text-white"
+        onClick={() => setOpen((v) => !v)}
+        className={`flex w-full items-center justify-between ${color} px-6 py-4 text-left text-white transition-colors`}
+        aria-expanded={open}
       >
-        <span className="font-semibold">{title}</span>
+        <span className="font-bold text-base">{title}</span>
         <span
-          className={`transition-transform ${open ? "rotate-90" : "rotate-0"}`}
+          className={`text-2xl font-light transition-transform ${
+            open ? "rotate-90" : ""
+          }`}
         >
-          ▶
+          ›
         </span>
       </button>
+
       <div
-        className={`grid transition-[grid-template-rows] duration-300 ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out
+            ${open ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}
       >
-        <div className="min-h-0 overflow-hidden bg-slate-950/40 px-5 pb-5 pt-0">
+        <div className="bg-white px-6 py-5 border-x border-b border-slate-200">
           {children}
         </div>
       </div>
@@ -398,27 +495,85 @@ function Accordion({
 }
 
 function Community() {
-  const imgs = [
-    "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1529336953121-a9bf0127c2fc?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1558021211-6d1403321394?q=80&w=1200&auto=format&fit=crop",
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const items = [
+    {
+      id: 1,
+      src: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 2,
+      src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 3,
+      src: "https://images.unsplash.com/photo-1558021211-6d1403321394?q=80&w=1200&auto=format&fit=crop",
+    },
   ];
+
+  const scrollByOne = (dir: "left" | "right") => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLDivElement>("[data-card]");
+    const step = card ? card.clientWidth + 24 /* gap-6 */ : el.clientWidth / 3;
+    el.scrollBy({ left: dir === "left" ? -step : step, behavior: "smooth" });
+  };
+
   return (
-    <section id="community" className="mx-auto max-w-6xl px-4 py-10">
-      <h2 className="text-2xl font-semibold">Our Community In Action</h2>
-      <div className="mt-5 grid gap-3 md:grid-cols-3">
-        {imgs.map((src, i) => (
+    <section id="community" className="relative mx-auto max-w-6xl px-4 py-16">
+      <h2 className="text-center text-3xl font-semibold tracking-tight text-slate-800 md:text-4xl">
+        Our Community In Action
+      </h2>
+
+      <div className="relative mt-8">
+        {/* arrows */}
+        <button
+          aria-label="Previous"
+          onClick={() => scrollByOne("left")}
+          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-200 bg-white/90 p-3 shadow-sm backdrop-blur hover:bg-white"
+        >
+          ←
+        </button>
+        <button
+          aria-label="Next"
+          onClick={() => scrollByOne("right")}
+          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-200 bg-white/90 p-3 shadow-sm backdrop-blur hover:bg-white"
+        >
+          →
+        </button>
+
+        {/* scroller */}
+        <div
+          ref={scrollerRef}
+          className="
+              scroll-smooth overflow-x-auto px-12
+              [scrollbar-width:none] [-ms-overflow-style:none]
+              [&::-webkit-scrollbar]:hidden
+            "
+        >
           <div
-            key={i}
-            className="overflow-hidden rounded-2xl border border-slate-200"
+            className="
+                grid grid-flow-col gap-6 snap-x snap-mandatory
+                auto-cols-[85%]                           /* mobile: 1 card-ish */
+                md:[grid-auto-columns:calc((100%-24px*2)/3)] /* md+: exactly 3 visible (gap-6 = 24px) */
+              "
           >
-            <img
-              className="h-60 w-full object-cover"
-              src={src}
-              alt="Community"
-            />
+            {items.map((it) => (
+              <div
+                key={it.id}
+                data-card
+                className="snap-center overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md"
+              >
+                <img
+                  src={it.src}
+                  alt="Community"
+                  className="h-64 w-full object-cover"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
